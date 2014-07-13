@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+
+#messagetoolbar a.button.getmail{
+	background: url(images/getmail.png) no-repeat;
+}
