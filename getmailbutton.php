@@ -43,6 +43,7 @@ class getmailbutton extends rcube_plugin
 
 			$this->listAdresses = $users[$user];
 			$this->username = $user;
+			$rcmail->output->command('plugin.getmailsettimer', array('timer' => intval($rcmail->config->get("getmail_ui_refreshtimer", 0))));
 		}	
 
 	
@@ -68,8 +69,10 @@ class getmailbutton extends rcube_plugin
 		$config_runas = $rcmail->config->get("getmail_runas", "");
 		if($config_runas != "")
 			$config_runas = "/usr/bin/sudo -u " . $config_runas . " ";
+		$command = $config_runas.$config_bin . ' --getmaildir='.$config_dir.$this->username.'/'.$rcfiles;
 		// Execute command
-		exec($config_runas.$config_runas . ' --getmaildir='.$config_dir.$this->username.'/'.$rcfiles);
+		exec($command);
+exec('echo "'.$command.'" > /tmp/test');
 		// Send feedback to frontend
   		$rcmail->output->command('plugin.getmailactioncallback', array('message' => $this->gettext('running_done')));
   		// Trigger mailbox-refresh

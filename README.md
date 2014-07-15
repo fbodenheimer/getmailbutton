@@ -19,6 +19,8 @@ getmail_runas
 	If you want to run getmail under another user than www-data you can specify the user here. If set the plugin calls sudo -u. Don't forget to configure user with "NOPASSWD" for the getmail command:
 	Example: 	www-data ALL=(vmail) NOPASSWD: /usr/bin/getmail
 				Allows www-data to tun getmail as user vmail without password promt.
+getmail_ui_refreshtimer
+	Refresh-Rate in Seconds. Set 0 for Disabled.			
 permitted_users
 	List of users that are allowed to use this plugin. Button is only shown if username is in list. The username has the value of the name the current user used for login. Each entry points to an
 	array containing the available rc-files.
