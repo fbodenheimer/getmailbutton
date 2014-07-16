@@ -71,10 +71,16 @@ class getmailbutton extends rcube_plugin
 			$config_runas = "/usr/bin/sudo -u " . $config_runas . " ";
 		$command = $config_runas.$config_bin . ' --getmaildir='.$config_dir.$this->username.'/'.$rcfiles;
 		// Execute command
-		exec($command);
-exec('echo "'.$command.'" > /tmp/test');
+		$ret = shell_exec($command);
+		// Count number of Emails fetched
+		$matches = array();
+		preg_match_all("/([0-9]+) messages \([0-9]+ bytes\) retrieved/", $text, $matches);
+		$mails_fetched = 0;
+		if($matches >= 1 && is_array($matches[1]))
+			foreach($matches[1] as $number)
+				$mails_fetched+= intval($number);
 		// Send feedback to frontend
-  		$rcmail->output->command('plugin.getmailactioncallback', array('message' => $this->gettext('running_done')));
+  		$rcmail->output->command('plugin.getmailactioncallback', array('message' => sprintf($this->gettext('running_done'), $mails_fetched)));
   		// Trigger mailbox-refresh
 		$rcmail->output->command('refresh');
 	}

@@ -5,4 +5,4 @@ $labels['buttontitle'] = 'Run getmail';
 
 $messages = array();
 $messages['running'] = 'Running getmail ...';
-$messages['running_done'] = 'getmail finished.';
+$messages['running_done'] = 'Finished getmail, fetched %d mails.';
