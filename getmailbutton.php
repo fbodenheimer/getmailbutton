@@ -74,7 +74,7 @@ class getmailbutton extends rcube_plugin
 		$ret = shell_exec($command);
 		// Count number of Emails fetched
 		$matches = array();
-		preg_match_all("/([0-9]+) messages \([0-9]+ bytes\) retrieved/", $text, $matches);
+		preg_match_all("/([0-9]+) messages \([0-9]+ bytes\) retrieved/", $ret, $matches);
 		$mails_fetched = 0;
 		if($matches >= 1 && is_array($matches[1]))
 			foreach($matches[1] as $number)
