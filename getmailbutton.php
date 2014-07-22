@@ -23,7 +23,7 @@ class getmailbutton extends rcube_plugin
 		$user = $_SESSION["username"];
 
 		// Plugin is only shown and activated when current user is configured
-		if(array_key_exists($user, $users))
+		if(array_key_exists($user, $users) && $rcmail->task == "mail" && $rcmail->action == "")
 		{
 			$this->add_texts('localization/', true);
 			$this->include_stylesheet($this->local_skin_path() .'/getmailbutton.css');
