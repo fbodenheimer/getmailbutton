@@ -23,21 +23,22 @@ class getmailbutton extends rcube_plugin
 		$user = $_SESSION["username"];
 
 		// Plugin is only shown and activated when current user is configured
-		if(array_key_exists($user, $users) && $rcmail->task == "mail" && $rcmail->action == "")
+		if(array_key_exists($user, $users))
 		{
 			$this->add_texts('localization/', true);
 			$this->include_stylesheet($this->local_skin_path() .'/getmailbutton.css');
-			$this->include_script('client.js');		
-			// Add button to toolbar
-			$this->add_button(array(
-						        'type' => 'link',
-						        'label' => 'getmailbutton.buttontext',
-						        'command' => 'plugin.getmailaction',
-						        'class' => 'button getmail',
-						        'classact' => 'button getmail',
-						        'title' => 'getmailbutton.buttontitle'
-							), 'toolbar');
-				   
+			$this->include_script('client.js');
+			if($rcmail->task == "mail" && $rcmail->action == "") {		
+				// Add button to toolbar
+				$this->add_button(array(
+							        'type' => 'link',
+							        'label' => 'getmailbutton.buttontext',
+							        'command' => 'plugin.getmailaction',
+							        'class' => 'button getmail',
+							        'classact' => 'button getmail',
+							        'title' => 'getmailbutton.buttontitle'
+								), 'toolbar');
+			}	   
 			// Register button-click action, calling refresh-method
 			$this->register_action('plugin.getmailaction', array($this, 'refresh'));
 

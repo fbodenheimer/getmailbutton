@@ -41,7 +41,8 @@ function getmailsettimer(response) {
 
 
 function getmailactioncallback(response) {
-	rcmail.display_message(response.message);
+	console.info(JSON.stringify(response));
+	rcmail.display_message(response.message, 'confirmation');
 	if(getmailbuttontimer != null)
 		getmailbuttontimer.startTimer();
 }
